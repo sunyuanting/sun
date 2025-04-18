@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
+
+  <body>
+    <!-- 網頁的內容都在此 -->
+     <!-- 產生五個橫向選單項目，選單項目分別為首頁、自我介紹、
+      作品集、教學影片 -->
+    <div class="menu">
+      <a href="index.html">首頁</a>
+      <a href="introduction.html">自我介紹</a>
+      <div class="dropdown">
+        <a href="#" onclick="return false;">作品集</a> <!-- Prevent default action -->
+        <div class="dropdown-content">
+          <a href="#" onclick="openModal('https://hackmd.io/@yuan07/HykTh1Ooyl'); return false;">0307</a>
+          <a href="#" onclick="openModal('https://hackmd.io/@yuan07/S143P7W2Jg'); return false;">0314</a>
+          <a href="#" onclick="openModal('https://hackmd.io/@yuan07/Hyc7oI9nJx'); return false;">0321</a>
+          <a href="#" onclick="openModal('https://hackmd.io/@yuan07/SJZC5lURJl'); return false;">0411</a>
+          <a href="#" onclick="openModal('https://hackmd.io/@yuan07/BJxNdBkJlx'); return false;">期中</a>
+        </div>
+      </div>
+      <a href="https://sunyuanting.github.io/0321/" target="_blank">測驗卷</a>
+      <a href="https://drive.google.com/file/d/1jdl9eXKj00fu1Dpl4gU4V7rsYUuu7iW-/view?usp=sharing" target="_blank">教學影片</a>
+    </div>
+
+    <div class="modal" id="modal">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <iframe id="modal-content"></iframe>
+    </div>
+
+    <div class="modal" id="quiz-modal" style="display: none;">
+      <button class="close-btn" onclick="closeQuiz()">×</button>
+      <iframe id="quiz-content" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+
+    <script src="sketch.js"></script>
+    <script>
+      const menu = document.querySelector('.menu');
+      document.addEventListener('mousemove', (e) => {
+        if (e.clientX > window.innerWidth / 2 && e.clientY < 300) {
+          menu.style.display = 'block';
+        } else {
+          menu.style.display = 'none';
+        }
+      });
+
+      const modal = document.getElementById('modal');
+      const modalContent = document.getElementById('modal-content');
+
+      function openModal(url) {
+        modalContent.src = url;
+        modal.style.display = 'block';
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        modalContent.src = '';
+      }
+
+      function openQuiz() {
+        const quizModal = document.getElementById('quiz-modal');
+        const quizContent = document.getElementById('quiz-content');
+        quizContent.src = 'https://sunyuanting.github.io/0321/';
+        quizModal.style.display = 'block';
+      }
+
+      function closeQuiz() {
+        const quizModal = document.getElementById('quiz-modal');
+        const quizContent = document.getElementById('quiz-content');
+        quizModal.style.display = 'none';
+        quizContent.src = ''; // Clear the iframe content
+      }
+    </script>
+  </body>
+</html>
